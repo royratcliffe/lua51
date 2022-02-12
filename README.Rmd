@@ -38,3 +38,20 @@ This is a basic example which shows you how to solve a common problem:
 library(lua51)
 ## basic example code
 ```
+
+## Rcpp packaging
+
+[rcpp.org]:http://www.rcpp.org/
+
+See [Rcpp][rcpp.org] for full details. This section simply sets out some abbreviated notes. The package applies `use_rcpp` from `usethis` in order to set up a C++ package.
+```r
+usethis::create_tidy_package("lua51")
+usethis::use_package_doc()
+usethis::use_rcpp()
+```
+The package comprises a single `Rcpp` module.
+```cpp
+RCPP_MODULE(lua51) {
+  using namespace Rcpp;
+}
+```
