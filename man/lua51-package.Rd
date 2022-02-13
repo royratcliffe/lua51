@@ -4,12 +4,12 @@
 \name{lua51-package}
 \alias{lua51}
 \alias{lua51-package}
-\title{lua51: What the Package Does (One Line, Title Case)}
+\title{lua51: Lua Version 5.1.5 State Machine}
 \description{
-What the package does (one paragraph).
+Wraps Lua 5.1.5 state machine using Rcpp. Lua state in R becomes \code{L <- new(LuaState)} and garbage collection on that state becomes \code{L$gc(2)} in R, for example.
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Roy Ratcliffe \email{royratcliffe@me.com} (\href{https://orcid.org/0000-0001-6594-1280}{ORCID})
 
 }
 \keyword{internal}
