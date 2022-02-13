@@ -9,6 +9,8 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/lua51)](https://CRAN.R-project.org/package=lua51)
+[![R build
+status](https://github.com/royratcliffe/lua51/workflows/R-CMD-check/badge.svg)](https://github.com/royratcliffe/lua51/actions?workflow=R-CMD-check)
 <!-- badges: end -->
 
 The goal of lua51 is to …
