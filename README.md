@@ -13,14 +13,14 @@ status](https://www.r-pkg.org/badges/version/lua51)](https://CRAN.R-project.org/
 status](https://github.com/royratcliffe/lua51/workflows/R-CMD-check/badge.svg)](https://github.com/royratcliffe/lua51/actions?workflow=R-CMD-check)
 <!-- badges: end -->
 
-The goal of lua51 is to …
+The goal of `lua51` is to embedded Lua 5.1.5 within R.
 
 ## Installation
 
-You can install the development version of lua51 like so:
+You can install the development version of `lua51` like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+devtools::install_github("royratcliffe/lua51")
 ```
 
 ## Example
@@ -29,7 +29,8 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(lua51)
-## basic example code
+
+L <- new(lua51::LuaState)
 ```
 
 ## Rcpp packaging
@@ -55,6 +56,12 @@ RCPP_MODULE(lua51) {
 But why C++ integration when Lua is pure C? The decision is one of
 style. All of the low-level Lua interface functions interact with a Lua
 ‘State’ encapsulating a single mutable Lua state machine. The design
-wraps this State into an object that you can instantiate using S6 class
-mechanisms. The S6 layer acts as a thin shim between R’s object world
+wraps this State into an object that you can instantiate using S4 class
+mechanisms. The S4 layer acts as a thin shim between R’s object world
 and the underlying Lua implementation.
+
+Underneath the bonnet, C++ `lua::State` maps to `lua51::LuaState` in R.
+The latter overloads `lua` by package and by class name; Lua appears
+twice, somewhat redundantly the second time. In R however, common usage
+first imports the package *then* accesses the package contents without
+namespace qualifiers, making the second Lua in `LuaState` useful.
