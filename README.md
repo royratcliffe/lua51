@@ -59,3 +59,9 @@ style. All of the low-level Lua interface functions interact with a Lua
 wraps this State into an object that you can instantiate using S4 class
 mechanisms. The S4 layer acts as a thin shim between R’s object world
 and the underlying Lua implementation.
+
+Underneath the bonnet, C++ `lua::State` maps to `lua51::LuaState` in R.
+The latter overloads `lua` by package and by class name; Lua appears
+twice, somewhat redundantly the second time. In R however, common usage
+first imports the package *then* accesses the package contents without
+namespace qualifiers, making the second Lua in `LuaState` useful.
