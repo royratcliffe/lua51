@@ -1,21 +1,20 @@
 Package: lua51
-Title: What the Package Does (One Line, Title Case)
+Title: Lua Version 5.1.5 State Machine
 Version: 0.0.0.9000
 Authors@R:
-    person(given = "Roy",
-           family = "Ratcliffe",
-           role = c("aut", "cre"),
-           email = "royratcliffe@me.com",
+    person("Roy", "Ratcliffe", , "royratcliffe@me.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6594-1280"))
-Description: What the package does (one paragraph).
+Description: Wraps Lua 5.1.5 state machine using Rcpp. Lua state in R
+    becomes \code{L <- new(LuaState)} and garbage collection on that state
+    becomes \code{L$gc(2)} in R, for example.
 License: MIT + file LICENSE
+Imports:
+    Rcpp
 Suggests:
     testthat (>= 3.0.0)
+LinkingTo:
+    Rcpp
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-LinkingTo:
-    Rcpp
-Imports:
-    Rcpp
