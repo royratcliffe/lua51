@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/lua51)](https://CRAN.R-project.org/package=lua51)
+[![R build status](https://github.com/royratcliffe/lua51/workflows/R-CMD-check/badge.svg)](https://github.com/royratcliffe/lua51/actions?workflow=R-CMD-check)
 <!-- badges: end -->
 
 The goal of lua51 is to ...
@@ -39,18 +40,21 @@ library(lua51)
 ## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+## Rcpp packaging
 
-```{r cars}
-summary(cars)
+[rcpp.org]:http://www.rcpp.org/
+
+See [Rcpp][rcpp.org] for full details. This section simply sets out some abbreviated notes. The package applies `use_rcpp` from `usethis` in order to set up a C++ package.
+```r
+usethis::create_tidy_package("lua51")
+usethis::use_package_doc()
+usethis::use_rcpp()
+```
+The package comprises a single `Rcpp` module.
+```cpp
+RCPP_MODULE(lua51) {
+  using namespace Rcpp;
+}
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+But why C++ integration when Lua is pure C? The decision is one of style. All of the low-level Lua interface functions interact with a Lua 'State' encapsulating a single mutable Lua state machine. The design wraps this State into an object that you can instantiate using S6 class mechanisms. The S6 layer acts as a thin shim between R's object world and the underlying Lua implementation.
